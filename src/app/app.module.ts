@@ -32,6 +32,13 @@ import { XLargeDirective } from './home/x-large';
 import '../styles/styles.scss';
 import '../styles/headings.css';
 
+// ---------------------------------------------------------------------
+// angular-modal-gallery
+import 'hammerjs'; // Mandatory for angular-modal-gallery >=3 (`npm i --save hammerjs`)
+import 'mousetrap'; // Mandatory for angular-modal-gallery >=3 (`npm i --save mousetrap`)
+import { ModalGalleryModule } from 'angular-modal-gallery';
+// ---------------------------------------------------------------------
+
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
@@ -60,7 +67,8 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    ModalGalleryModule.forRoot(),  // <------------------------ angular-modal-gallery
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

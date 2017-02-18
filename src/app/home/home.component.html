@@ -1,4 +1,138 @@
 <div>
+  <section id="Images1">
+    <h3>1 - Observable of images with delay(300)</h3>
+    <p>imageModal with</p>
+    <ul>
+      <li>modalImages is an Observable&lt;Array&lt;Image&gt;&gt; with 300ms of delay (to simulate a network request)</li>
+      <li>No downloadable images, because downloadable = false (showDownloadButton is false by default)</li>
+      <li>Subscribed to all outputs (hasData, close, show, firstImage, lastImage)</li>
+    </ul>
+    <br>
+    <imageModal [modalImages]="images"
+                [downloadable]="false"
+                (hasData)="onImageLoaded($event)"
+                (close)="onCloseImageModal($event)"
+                (show)="onVisibleIndex($event)"
+                (firstImage)="onIsFirstImage($event)"
+                (lastImage)="onIsLastImage($event)"></imageModal>
+  </section>
+  <section id="Images2">
+    <h3>2 - Observable of images with delay(300) + download (both 'ctrl+s' and button)</h3>
+    <p>imageModal with</p>
+    <ul>
+      <li>modalImages is an Observable&lt;Array&lt;Image&gt;&gt; with 300ms of delay (to simulate a network request)</li>
+      <li>downloadable images, because downloadable = true. So you can use ctrl+s to save the displayed image</li>
+      <li>download button displayed because, showDownloadButton = true and downloadable is also = true</li>
+      <li>Subscribed to all outputs (hasData, close, show, firstImage, lastImage)</li>
+    </ul>
+    <br>
+    <imageModal [modalImages]="images"
+                [showDownloadButton]="true"
+                [downloadable]="true"
+                (hasData)="onImageLoaded($event)"
+                (close)="onCloseImageModal($event)"
+                (show)="onVisibleIndex($event)"
+                (firstImage)="onIsFirstImage($event)"
+                (lastImage)="onIsLastImage($event)"></imageModal>
+  </section>
+  <section id="Images3">
+    <h3>3 - Array of images + download (both 'ctrl+s' and button)</h3>
+    <p>imageModal with</p>
+    <ul>
+      <li>modalImages is an Array&lt;Image&gt;</li>
+      <li>downloadable images, because downloadable = true. So you can use ctrl+s to save the displayed image</li>
+      <li>download button displayed because, showDownloadButton = true and downloadable is also = true</li>
+      <li>Subscribed to all outputs (hasData, close, show, firstImage, lastImage)</li>
+    </ul>
+    <br>
+    <imageModal [modalImages]="imagesArray"
+                [showDownloadButton]="true"
+                [downloadable]="true"
+                (hasData)="onImageLoaded($event)"
+                (close)="onCloseImageModal($event)"
+                (show)="onVisibleIndex($event)"
+                (firstImage)="onIsFirstImage($event)"
+                (lastImage)="onIsLastImage($event)"></imageModal>
+  </section>
+  <section id="Images4">
+    <br>
+    <h3>4 - Observable of images with a single element and without a delay</h3>
+    <p>imageModal with</p>
+    <ul>
+      <li>modalImages is an Observable&lt;Array&lt;Image&gt;&gt; without delay</li>
+      <li>no downloadable, because both showDownloadButton and downloadable are false by default</li>
+      <li>Subscribed to all outputs (hasData, close, show, firstImage, lastImage)</li>
+    </ul>
+    <br>
+    <!-- both showDownloadButton and downloadable are false by default -->
+    <imageModal [modalImages]="singleImage"
+                (hasData)="onImageLoaded($event)"
+                (close)="onCloseImageModal($event)"
+                (show)="onVisibleIndex($event)"
+                (firstImage)="onIsFirstImage($event)"
+                (lastImage)="onIsLastImage($event)"></imageModal>
+  </section>
+  <section id="Images5">
+    <br>
+    <h3>5 - Array with thumbnail pointers + download (only 'ctrl+s', without button)</h3>
+    <p>imageModal with</p>
+    <ul>
+      <li>modalImages is an Array&lt;Image&gt;</li>
+      <li>imagePointer as input</li>
+      <li>downloadable images only using ctrl+s, because both downloadable = true, but showDownloadButton is false by default</li>
+      <li>Subscribed to all outputs (hasData, close, show, firstImage, lastImage)</li>
+    </ul>
+    <br>
+    <div *ngFor="let img of imagesArray; let i = index">
+      <div class="float-left" *ngIf="i <= 2">
+        <a class="more" *ngIf="i==2" (click)="openImageModal(img)"> +{{imagesArray.length - 3}} more </a>
+        <img class="list-img" src="{{img.thumb}}" (click)="openImageModal(img)" alt='{{img.description}}'/>
+      </div>
+    </div>
+    <div *ngIf="openModalWindow">
+      <imageModal [modalImages]="imagesArray"
+                  [imagePointer]="imagePointer"
+                  [downloadable]="true"
+                  (hasData)="onImageLoaded($event)"
+                  (close)="onCloseImageModal($event)"
+                  (show)="onVisibleIndex($event)"
+                  (firstImage)="onIsFirstImage($event)"
+                  (lastImage)="onIsLastImage($event)"></imageModal>
+    </div>
+  </section>
+  <br><br>
+  <section id="Images6">
+    <br>
+    <h3>6 - Observable with thumbnail pointers + download (only 'ctrl+s', without button)</h3>
+    <p>imageModal with</p>
+    <ul>
+      <li>modalImages is an Observable&lt;Array&lt;Image&gt;&gt; with 300ms of delay (to simulate a network request)</li>
+      <li>imagePointer as input</li>
+      <li>downloadable images only using ctrl+s, because both downloadable = true, but showDownloadButton is false by default</li>
+      <li>Subscribed to all outputs (hasData, close, show, firstImage, lastImage)</li>
+    </ul>
+    <br>
+    <div *ngFor="let img of images | async; let i = index">
+      <div class="float-left" *ngIf="i <= 2">
+        <a class="more" *ngIf="i==2" (click)="openImageModalObservable(img)"> +{{(images | async)?.length - 3}}
+          more </a>
+        <img class="list-img" src="{{img.thumb}}" (click)="openImageModalObservable(img)" alt='{{img.description}}'/>
+      </div>
+    </div>
+    <div *ngIf="openModalWindowObservable">
+      <imageModal [modalImages]="images"
+                  [imagePointer]="imagePointerObservable"
+                  [downloadable]="true"
+                  (hasData)="onImageLoaded($event)"
+                  (close)="onCloseImageModal($event)"
+                  (show)="onVisibleIndex($event)"
+                  (firstImage)="onIsFirstImage($event)"
+                  (lastImage)="onIsLastImage($event)"></imageModal>
+    </div>
+  </section>
+</div>
+<br><br>
+<div>
   <h1 x-large class="sample-content">Your Content Here</h1>
 
   <hr>
