@@ -80,6 +80,8 @@
     "@angularclass/conventions-loader": "^1.0.2",
     "@angularclass/hmr": "~1.2.2",
     "@angularclass/hmr-loader": "~3.0.2",
+    "@types/hammerjs": "^2.0.34",
+    "@types/mousetrap": "^1.5.33",
     "angular-modal-gallery": "^2.0.2",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
