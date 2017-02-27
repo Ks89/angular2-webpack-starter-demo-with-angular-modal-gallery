@@ -174,7 +174,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   public addRandomImage() {
     this.imagesArray.push(this.imagesArray[Math.floor(Math.random() * this.imagesArray.length)]);
   }
-  // release resources for example 5
   public ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
