@@ -41,32 +41,32 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public imagesArray: Image[] = [
     new Image(
-      '../../assets/images/gallery/img1.jpg',
+      '../../../../assets/images/gallery/img1.jpg',
       null, // no thumb
       null, // no description
       'http://www.google.com'
     ),
     new Image(
-      '../../assets/images/gallery/img2.png', // example with a PNG image
+      '../../../../assets/images/gallery/img2.png', // example with a PNG image
       null, // no thumb
       'Description 2',
       null // url
     ),
     new Image(
-      '../../assets/images/gallery/img3.jpg',
-      '../../assets/images/gallery/thumbs/img3.png', // example with a PNG thumb image
+      '../../../../assets/images/gallery/img3.jpg',
+      '../../../../assets/images/gallery/thumbs/img3.png', // example with a PNG thumb image
       'Description 3',
       'http://www.google.com'
     ),
     new Image(
-      '../../assets/images/gallery/img4.jpg',
+      '../../../../assets/images/gallery/img4.jpg',
       null, // no thumb
       'Description 4',
       'http://www.google.com'
     ),
     new Image(
-      '../../assets/images/gallery/img5.jpg',
-      '../../assets/images/gallery/thumbs/img5.jpg',
+      '../../../../assets/images/gallery/img5.jpg',
+      '../../../../assets/images/gallery/thumbs/img5.jpg',
       null, // no description
       null // url
     )
@@ -78,8 +78,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   // array with a single image inside (the first one)
   public singleImage: Observable<Image[]> = Observable.of([
     new Image(
-      '../../assets/images/gallery/img1.jpg',
-      '../../assets/images/gallery/thumbs/img1.jpg',
+      '../../../../assets/images/gallery/img1.jpg',
+      '../../../../assets/images/gallery/thumbs/img1.jpg',
       'Description 1',
       'http://www.google.com'
     )]
@@ -138,42 +138,44 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public openImageModalObservable(image: Image) {
     this.subscription = this.images.subscribe((val: Image[]) => {
-      this.imagePointer = val.indexOf(image);
-      this.openModalWindow = true;
+      this.imagePointerObservable = val.indexOf(image);
+      this.openModalWindowObservable = true;
     });
   }
 
-  onImageLoaded(event: ImageModalEvent) {
+  public onImageLoaded(event: ImageModalEvent) {
     // angular-modal-gallery will emit this event if it will load successfully input images
     console.log('onImageLoaded action: ' + Action[event.action]);
     console.log('onImageLoaded result:' + event.result);
   }
 
-  onVisibleIndex(event: ImageModalEvent) {
+  public onVisibleIndex(event: ImageModalEvent) {
     this.customFullDescription.customFullDescription = `Custom description of visible image with index= ${event.result}`;
     console.log('action: ' + Action[event.action]);
     console.log('result:' + event.result);
   }
 
-  onIsFirstImage(event: ImageModalEvent) {
+  public onIsFirstImage(event: ImageModalEvent) {
     console.log('onfirst action: ' + Action[event.action]);
     console.log('onfirst result:' + event.result);
   }
 
-  onIsLastImage(event: ImageModalEvent) {
+  public onIsLastImage(event: ImageModalEvent) {
     console.log('onlast action: ' + Action[event.action]);
     console.log('onlast result:' + event.result);
   }
 
-  onCloseImageModal(event: ImageModalEvent) {
+  public onCloseImageModal(event: ImageModalEvent) {
     console.log('onClose action: ' + Action[event.action]);
     console.log('onClose result:' + event.result);
     this.openModalWindow = false;
+    this.openModalWindowObservable = false;
   }
 
   public addRandomImage() {
     this.imagesArray.push(this.imagesArray[Math.floor(Math.random() * this.imagesArray.length)]);
   }
+
   public ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
