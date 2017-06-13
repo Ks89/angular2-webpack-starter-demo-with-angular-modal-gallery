@@ -396,7 +396,7 @@ module.exports = function (options) {
         disabled: !AOT,
         tsConfig: helpers.root('tsconfig.webpack.json'),
         // resourceOverride: helpers.root('config/resource-override.js')
-      })
+      }),
 
       /**
        * Plugin: InlineManifestWebpackPlugin

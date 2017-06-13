@@ -117,11 +117,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private imagesArraySubscription: Subscription;
   // --------------------------------------------------------------------------------
-  // TypeScript public modifiers
-  /**
-   * Set our default values
-   */
-  public localState = { value: '' };
   /**
    * TypeScript public modifiers
    */
