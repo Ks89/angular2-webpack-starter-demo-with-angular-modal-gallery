@@ -391,10 +391,6 @@ module.exports = function (options) {
          */
         disabled: !AOT,
         tsConfig: helpers.root('tsconfig.webpack.json'),
-<<<<<<< HEAD
-        // resourceOverride: helpers.root('config/resource-override.js')
-=======
->>>>>>> e1f25d9b208c4d64226b5792452b445fd6ec5020
       }),
 
       /**
