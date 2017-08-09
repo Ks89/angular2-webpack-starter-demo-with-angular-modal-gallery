@@ -140,20 +140,16 @@ module.exports = function (options) {
               }
             },
             {
+              loader: 'ngc-webpack',
+              options: {
+                disable: !AOT,
+              }
+            },
+            {
               loader: 'angular2-template-loader'
             }
           ],
           exclude: [/\.(spec|e2e)\.ts$/]
-        },
-
-        /**
-         * Json loader support for *.json files.
-         *
-         * See: https://github.com/webpack/json-loader
-         */
-        {
-          test: /\.json$/,
-          use: 'json-loader'
         },
 
         /**
@@ -224,7 +220,7 @@ module.exports = function (options) {
 
       /**
        * Plugin: ForkCheckerPlugin
-       * Description: Do type checking in a separate process, so webpack don't need to wait.
+       * Description: Do type checking in a separate process, so webpack doesn't need to wait.
        *
        * See: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
        */
@@ -395,7 +391,10 @@ module.exports = function (options) {
          */
         disabled: !AOT,
         tsConfig: helpers.root('tsconfig.webpack.json'),
+<<<<<<< HEAD
         // resourceOverride: helpers.root('config/resource-override.js')
+=======
+>>>>>>> e1f25d9b208c4d64226b5792452b445fd6ec5020
       }),
 
       /**
