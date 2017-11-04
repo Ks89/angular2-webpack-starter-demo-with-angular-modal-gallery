@@ -15,6 +15,8 @@ import {
   PreloadAllModules
 } from '@angular/router';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -68,10 +70,14 @@ type StoreType = {
    */
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-    ModalGalleryModule.forRoot(),  // <------------------------ angular-modal-gallery
+    RouterModule.forRoot(ROUTES, {
+      useHash: Boolean(history.pushState) === false,
+      preloadingStrategy: PreloadAllModules
+    }),
+    ModalGalleryModule.forRoot()  // <------------------------ angular-modal-gallery
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
