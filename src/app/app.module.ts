@@ -66,9 +66,7 @@ interface StoreType {
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules
     }),
-<<<<<<< HEAD
-    ModalGalleryModule.forRoot()  // <------------------------ angular-modal-gallery
-=======
+    ModalGalleryModule.forRoot(),  // <------------------------ angular-modal-gallery
 
     /**
      * This section will import the `DevModuleModule` only in certain build types.
@@ -76,7 +74,6 @@ interface StoreType {
      * This is a simple example, a big app should probably implement some logic
      */
     ...environment.showDevModule ? [ DevModuleModule ] : [],
->>>>>>> db2af7289d789ea26bacbe60120e8ff5c0105895
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
